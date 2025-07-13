@@ -7,192 +7,124 @@
   <link rel="icon" href="https://i.postimg.cc/PrwR3qd6/photo-6311810597796301602-x.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
 
-  <style> /*电脑模式*/
-    :root {
-      --bg-color: #ffffff;
-      --text-color: #222222;
-      --nav-bg: rgba(255, 255, 255, 0.15);
-      --nav-blur: blur(10px);
-      --underline: var(--text-color);
-    }
+<style>/*设置*/
+html {
+  scroll-behavior: smooth;
+}
+:root {
+  --bg-color: #ffffff;
+  --text-color: #222222;
+  --nav-bg: rgba(255, 255, 255, 0.15);
+  --nav-blur: blur(10px);
+}
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f0f0f0;
+  --nav-bg: rgba(30, 30, 30, 0.5);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Noto Serif SC', serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
+}
+canvas#stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+ </style>
 
-    body.dark-mode {
-      --bg-color: #121212;
-      --text-color: #f0f0f0;
-      --nav-bg: rgba(30, 30, 30, 0.5);
-      --underline: var(--text-color);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Noto Serif SC', serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background 0.3s, color 0.3s;
-      overflow-x: hidden;
-    }
-
-    canvas#stars {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 70px;
-      padding: 0 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--nav-bg);
-      backdrop-filter: var(--nav-blur);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-    }
-
-    .logo {
-      font-size: 26px;
-      font-weight: 600;
-      text-decoration: none;
-      color: var(--text-color);
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 30px;
-    }
-
-    .nav-links li a {
-      font-size: 18px;
-      color: var(--text-color);
-      text-decoration: none;
-      position: relative;
-      padding: 4px 0;
-      transition: color 0.3s;
-    }
-
-    .nav-links li a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #3f87a6;
-      transition: width 0.3s;
-    }
-
-    .nav-links li a:hover::after {
-      width: 100%;
-    }
-
-    .toggle-mode, .menu-toggle {
-      background: none;
-      border: none;
-      font-size: 20px;
-      cursor: pointer;
-      color: var(--text-color);
-      transition: color 0.3s;
-    }
-
-    .content {
-      padding: 120px 40px;
-      font-size: 18px;
-      line-height: 1.6;
-    }
-
-    .underline {
-      display: inline-block;
-      font-size: 35px;
-      animation: blink 1.5s steps(1) infinite;
-      margin-top: 10px;
-    }
-
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      50.01%, 100% { opacity: 0; }
-    }
-
-    .riqi {
-      text-align: right;
-      font-size: 15px;
-    }
-
-    .logo-pic {
-      position: absolute;
-      top: 160px;
-      right: 50px;
-      height: 250px;
-      pointer-events: none;
-    }
-
+ <style>/*导航*/
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--nav-bg);
+  backdrop-filter: var(--nav-blur);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+.logo {
+  font-size: 26px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text-color);
+}
 .logo-container {
   display: flex;
   align-items: center;
   gap: 8px;
+  padding-left: 80px;
 }
-
 .logo-img {
   width: 40px;
   height: 40px;
 }
-
-footer {
-  font-size: 15px;
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+.nav-links li a {
+  font-size: 18px;
+  color: var(--text-color);
+  text-decoration: none;
+  position: relative;
+  padding: 4px 0;
+  transition: color 0.3s;
+}
+.nav-links li a::after {
+  content: '';
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  color: var(--text-color); /* 关键：自动跟随日夜模式变色 */
-  background: transparent;
-  padding-bottom: 10px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #3f87a6;
+  transition: width 0.3s;
 }
-
-.nuli{
-  font-size: 25px;
-  position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  color: var(--text-color); /* 关键：自动跟随日夜模式变色 */
-  background: transparent;
-  padding-bottom: 10px;
+.nav-links li a:hover::after {
+  width: 100%;
 }
-  </style>
-
-<style> /*手机模式*/
+.toggle-mode, .menu-toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: color 0.3s;
+}
 .menu-toggle {
   display: none;
 }
-
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
     font-size: 26px;
   }
-
   .nav-links {
     position: fixed;
     top: 70px;
     left: 0;
     width: 100%;
-    background-color: var(--bg-color); /* ✅ 使用变量 */
-    color: var(--text-color);           /* ✅ 确保文字颜色跟随切换 */
+    background-color: var(--bg-color);
+    color: var(--text-color);
     flex-direction: column;
     align-items: center;
     gap: 15px;
@@ -201,55 +133,284 @@ footer {
     z-index: 999;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
-
   .nav-links.active {
     display: flex;
   }
-
-  .nav-links li a {
-    font-size: 18px;
-    color: var(--text-color); /* ✅ 链接文字颜色也同步 */
-  }
-
   .navbar {
     padding: 0 20px;
-  }
-
-  .logo-pic {
-    top: 130px;
-    right: 20px;
-    height: 180px;
   }
 }
 </style>
 
+<style>/*底部*/
+footer {
+  font-size: 15px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: var(--text-color);
+  background: transparent;
+  padding: 20px 0;
+}
+</style>
+
+<style>/* 作品集目录 */
+.gallery-menu {
+  position: fixed;
+  right: 90px;
+  top: 100px;
+  padding: 30px;
+  background: transparent;
+  z-index: 10;
+}
+.gallery-menu p {
+  text-align: left;
+  font-size: 20px;
+}
+.gallery-menu ul {
+  gap: 9px;
+  text-align: right;
+  list-style: none;
+}
+.gallery-menu ul li {
+  margin: 8px 0;
+}
+.gallery-menu ul li a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 15px;
+  transition: color 0.3s;
+}
+.gallery-menu ul li a:hover,
+.gallery-menu ul li a.active {
+  color: #3f87a6;
+  font-weight: bold;
+}
+</style>
+
+<style>/*Gallery 1*/
+.gallery-1 {
+  padding-left: 125px;
+  padding-top: 150px;
+  padding-right: 80px;
+}
+.gallery-1 h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+.gallery1-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.gallery1-box {
+  border: 2px solid #aaa;
+  border-radius: 10px;
+  margin-bottom: 55px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 分散排列 */
+  align-items: center;
+  height: 400x; /* 设置固定高度，你可以根据图和字的比例自行调整 */
+  text-align: center;
+}
+
+.gallery1-box img {
+  width: 170px;
+  height: 170px;
+  border-radius: 6px;
+}
+
+.shirt-1 {
+  width: 250px !important;     /* 你可以自由调大调小 */
+  height: auto !important;      /* 保持原图比例 */
+  border-radius: 6px;
+}
+
+.card-1 {
+  width: 150px !important;     /* 你可以自由调大调小 */
+  height: auto !important;      /* 保持原图比例 */
+  border-radius: 6px;
+}
+
+.card-2 {
+  width: 150px !important;     /* 你可以自由调大调小 */
+  height: auto !important;      /* 保持原图比例 */
+  border-radius: 6px;
+}
+
+.gallery1-box p {
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+.divider-line {
+  margin: 0px ; 
+  width: 75%;               /* 中间线条宽度，你可调 50%-80% */
+  border-bottom: 1px solid #ccc;
+}
+
+</style>
+
+<style>/*Gallery 2*/
+.gallery-2 {
+  padding-left: 125px;
+  padding-top: 10px;
+}
+.gallery-2 h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+.gallery2-box {
+  border: 2px solid #aaa;
+  border-radius: 10px;
+  margin-bottom: 55px;
+  padding: 10px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+}
+
+.gallery2-box img {
+  width: 150px;
+  height: auto;
+  border-radius: 6px;
+}
+
+.gallery2-box p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+.divider-line {
+  margin: 0px ; 
+  width: 75%;               /* 中间线条宽度，你可调 50%-80% */
+  border-bottom: 1px solid #ccc;
+}
+
+</style>
+
+<style>/*Gallery 3*/
+.gallery-3 {
+  padding-left: 125px;
+  padding-top: 10px;
+}
+.gallery-3 h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+.gallery3-box {
+  border: 2px solid #aaa;
+  border-radius: 10px;
+  margin-bottom: 55px;
+  padding: 10px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+}
+
+.gallery3-box img {
+  width: 200px;
+  height: auto;
+  border-radius: 6px;
+}
+
+.gallery3-box p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+.divider-line {
+  margin: 0px ; 
+  width: 75%;               /* 中间线条宽度，你可调 50%-80% */
+  border-bottom: 1px solid #ccc;
+}
+
+</style>
+
+
 </head>
-<body>
+
+<body> 
   <canvas id="stars"></canvas>
 
-<nav class="navbar">
-  <div class="logo-container">
-     <a href="#" class="logo">Summerch</a>
-    <img src="https://i.postimg.cc/3w03jGKY/photo-6311810597796301602-x-removebg-preview.png" class="logo-img">
-  </div>
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <ul class="nav-links">
-    <li><a href="index.html">首页</a></li>
-    <li><a href="Summerch 作品集.html">作品集</a></li>
-    <li><a href="Summerch 工委随记.html">工委随记</a></li>
-    <li><a href="#">其他</a></li>
-  </ul>
-  <button class="toggle-mode" onclick="toggleMode()">🌙</button>
-</nav>
+  <nav class="navbar">
+    <div class="logo-container">
+      <a href="#" class="logo">Summerch</a>
+      <img src="https://i.postimg.cc/3w03jGKY/photo-6311810597796301602-x-removebg-preview.png" class="logo-img">
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="Summerch 作品集.html">作品集</a></li>
+      <li><a href="Summerch 工委随记.html">工委随记</a></li>
+      <li><a href="#">其他</a></li>
+    </ul>
+    <button class="toggle-mode" onclick="toggleMode()">🌙</button>
+  </nav>
 
-<div>
-  <h1 class="nuli">会努力更新的</h1>
-</div>
+  <aside class="gallery-menu">
+    <p><b>📁 作品目录</b></p>
+    <ul>
+      <li><a href="#camppbp2024">2024年生活营</a></li>
+      <li><a href="#camppbp2025">2025年生活营</a></li>
+      <li><a href="#other">其他</a></li>
+    </ul>
+  </aside>
 
-<footer>
-  <p id="clock" style="font-size: 15px;"></p>
-  <p>© 2025 Summerch | 小站慢慢更新中 🎧</p>
-</footer>
+  <section id="camppbp2024" class="gallery-1">
+    <h2>2024年生活营</h2>
+    <div class="gallery1-container">
+      <div class="gallery1-box">
+      <img src="https://i.postimg.cc/C5dQCD8S/logo-psd-4.png" alt="Logo">
+      <p>Logo  </p>
+      </div>
+      <div class="gallery1-box">
+      <img src="https://i.postimg.cc/wvLwXm9s/psd-1-removebg-preview.png" class="shirt-1" alt="Logo">
+      <p>营衣  </p>
+      </div>
+      <div class="gallery1-box">
+      <img src="https://i.postimg.cc/ZKskPB9H/image.png" class="card-1" alt="Logo">
+      <p>工委卡 </p>
+      </div>
+      <div class="gallery1-box">
+      <img src="https://i.postimg.cc/ZKskPB9H/image.png" class="card-1" alt="Logo">
+      <p>营员卡 </p>
+      </div> 
+    </div>
+    <div class="divider-line"></div>
+  </section>
+
+  <section id="camppbp2025" class="gallery-2">
+    <h2>2025年生活营</h2>
+    <div class="gallery2-box">
+      <img src="https://i.postimg.cc/wxXPCSDY/2025-logo.png" alt="Logo">
+      <p>营服设计 | 可有可无</p>
+    </div>
+   <div class="divider-line"></div>
+  </section>
+
+  <section id="other" class="gallery-3">
+    <h2>其他</h2>
+    <div class="gallery3-box">
+      <img src="https://i.postimg.cc/C5dQCD8S/logo-psd-4.png" alt="Logo">
+      <p>图文海报 | 可有可无</p>
+    </div>
+    <div class="divider-line"></div>
+  </section>
+
+  <footer>
+    <p id="clock" style="font-size: 15px;"></p>
+    <p>© 2025 Summerch | 小站慢慢更新中 🎧</p>
+  </footer>
 
   <script>
 function toggleMode() {
@@ -258,8 +419,6 @@ function toggleMode() {
   button.textContent = isDark ? "☀️" : "🌙";
   localStorage.setItem("theme", isDark ? "dark" : "light");
 }
-
-// 页面加载时读取用户设置
 window.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
@@ -269,69 +428,59 @@ window.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".toggle-mode").textContent = "🌙";
   }
 });
-
-    function toggleMenu() {
-      const navLinks = document.querySelector(".nav-links");
-      navLinks.classList.toggle("active");
+function toggleMenu() {
+  const navLinks = document.querySelector(".nav-links");
+  navLinks.classList.toggle("active");
+}
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.querySelector(".nav-links").classList.remove("active");
+  });
+});
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+let w = window.innerWidth;
+let h = window.innerHeight;
+canvas.width = w;
+canvas.height = h;
+let stars = [];
+for (let i = 0; i < 100; i++) {
+  stars.push({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: Math.random() * 1.2,
+    d: Math.random() * 1
+  });
+}
+function drawStars() {
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = "white";
+  ctx.beginPath();
+  for (let i = 0; i < stars.length; i++) {
+    const s = stars[i];
+    ctx.moveTo(s.x, s.y);
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2, true);
+  }
+  ctx.fill();
+  update();
+}
+function update() {
+  for (let i = 0; i < stars.length; i++) {
+    stars[i].y += stars[i].d;
+    if (stars[i].y > h) {
+      stars[i].y = 0;
+      stars[i].x = Math.random() * w;
     }
-
-    // 自动关闭菜单（点击菜单链接）
-    document.querySelectorAll(".nav-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        document.querySelector(".nav-links").classList.remove("active");
-      });
-    });
-
-    // 星空背景动画
-    const canvas = document.getElementById("stars");
-    const ctx = canvas.getContext("2d");
-    let w = window.innerWidth;
-    let h = window.innerHeight;
-    canvas.width = w;
-    canvas.height = h;
-
-    let stars = [];
-    for (let i = 0; i < 100; i++) {
-      stars.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: Math.random() * 1.2,
-        d: Math.random() * 1
-      });
-    }
-
-    function drawStars() {
-      ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = "white";
-      ctx.beginPath();
-      for (let i = 0; i < stars.length; i++) {
-        const s = stars[i];
-        ctx.moveTo(s.x, s.y);
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2, true);
-      }
-      ctx.fill();
-      update();
-    }
-
-    function update() {
-      for (let i = 0; i < stars.length; i++) {
-        stars[i].y += stars[i].d;
-        if (stars[i].y > h) {
-          stars[i].y = 0;
-          stars[i].x = Math.random() * w;
-        }
-      }
-    }
-
-    setInterval(drawStars, 33);
-    window.addEventListener("resize", () => {
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = w;
-      canvas.height = h;
-    });
-
-    function updateClock() {
+  }
+}
+setInterval(drawStars, 33);
+window.addEventListener("resize", () => {
+  w = window.innerWidth;
+  h = window.innerHeight;
+  canvas.width = w;
+  canvas.height = h;
+});
+function updateClock() {
   const now = new Date();
   const options = { 
     year: 'numeric', 
@@ -344,14 +493,28 @@ window.addEventListener("DOMContentLoaded", () => {
   };
   document.getElementById('clock').innerText = now.toLocaleString('zh-CN', options);
 }
-
 setInterval(updateClock, 1000);
-updateClock(); // 初始立即运行
+updateClock();
 
-
-
+// 滚动高亮目录
+const sections = document.querySelectorAll("section");
+const menuLinks = document.querySelectorAll(".gallery-menu ul li a");
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop - 120;
+    const sectionHeight = section.clientHeight;
+    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+      current = section.getAttribute("id");
+    }
+  });
+  menuLinks.forEach((link) => {
+    link.classList.remove("active");
+    if (link.getAttribute("href").includes(current)) {
+      link.classList.add("active");
+    }
+  });
+});
   </script>
-
-  
 </body>
 </html>
