@@ -149,20 +149,69 @@
       height: 5vh;
     }
 
+    /* 默认隐藏菜单按钮（桌面端不显示） */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+/* 响应式小屏幕调整 */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color);
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 0;
+    display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .navbar ul li a {
+    font-size: 18px;
+  }
+
+  .navbar {
+    padding: 0 20px;
+  }
+}
+
+
+    
+
   </style>
 </head>
 <body>
   <canvas id="stars"></canvas>
-  <nav class="navbar">
-    <a href="#" class="logo">Summerch</a>
-    <ul>
-      <li><a href="#">首页</a></li>
-      <li><a href="#">其他</a></li>
-      <li><a href="#">其他</a></li>
-      <li><a href="#">其他</a></li>
-    </ul>
-    <button class="toggle-mode" onclick="toggleMode()">🌙</button>
-  </nav>
+<nav class="navbar">
+  <a href="#" class="logo">Summerch</a>
+  
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <ul class="nav-links">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">其他</a></li>
+    <li><a href="#">其他</a></li>
+    <li><a href="#">其他</a></li>
+  </ul>
+
+  <button class="toggle-mode" onclick="toggleMode()">🌙</button>
+</nav>
 
   <div class="content">
     <h1>欢迎观看<span class="underline">_</span></h1>
@@ -232,6 +281,18 @@
       canvas.width = w;
       canvas.height = h;
     });
+
+    function toggleMenu() {
+  const navLinks = document.querySelector(".nav-links");
+  navLinks.classList.toggle("active");
+}
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.querySelector(".nav-links").classList.remove("active");
+  });
+});
+
 
 </script>
 
