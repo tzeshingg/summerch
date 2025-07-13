@@ -2,10 +2,9 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>我的作品站</title>
   <link rel="icon" href="https://i.postimg.cc/PrwR3qd6/photo-6311810597796301602-x.png" type="image/png">
-
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -61,23 +60,22 @@
       backdrop-filter: var(--nav-blur);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       z-index: 1000;
-      transition: all 0.3s ease;
     }
 
-    .navbar .logo {
+    .logo {
       font-size: 26px;
       font-weight: 600;
       text-decoration: none;
       color: var(--text-color);
     }
 
-    .navbar ul {
+    .nav-links {
       list-style: none;
       display: flex;
       gap: 30px;
     }
 
-    .navbar ul li a {
+    .nav-links li a {
       font-size: 18px;
       color: var(--text-color);
       text-decoration: none;
@@ -86,7 +84,7 @@
       transition: color 0.3s;
     }
 
-    .navbar ul li a::after {
+    .nav-links li a::after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -97,11 +95,11 @@
       transition: width 0.3s;
     }
 
-    .navbar ul li a:hover::after {
+    .nav-links li a:hover::after {
       width: 100%;
     }
 
-    .toggle-mode {
+    .toggle-mode, .menu-toggle {
       background: none;
       border: none;
       font-size: 20px;
@@ -124,12 +122,8 @@
     }
 
     @keyframes blink {
-      0%, 50% {
-        opacity: 1;
-      }
-      50.01%, 100% {
-        opacity: 0;
-      }
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
     }
 
     .riqi {
@@ -145,73 +139,70 @@
       pointer-events: none;
     }
 
-    .scroll{
+    .scroll {
       height: 5vh;
     }
 
-    /* 默认隐藏菜单按钮（桌面端不显示） */
-.menu-toggle {
-  display: none;
-  font-size: 24px;
-  background: none;
-  border: none;
-  color: var(--text-color);
-  cursor: pointer;
-}
+    /* 手机端样式 */
+    .menu-toggle {
+      display: none;
+    }
 
-/* 响应式小屏幕调整 */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+        font-size: 26px;
+      }
 
-  .nav-links {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background-color: var(--bg-color);
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 15px 0;
-    display: none;
-  }
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-color);
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 15px 0;
+        display: none;
+        z-index: 999;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
 
-  .nav-links.active {
-    display: flex;
-  }
+      .nav-links.active {
+        display: flex;
+      }
 
-  .navbar ul li a {
-    font-size: 18px;
-  }
+      .nav-links li a {
+        font-size: 18px;
+      }
 
-  .navbar {
-    padding: 0 20px;
-  }
-}
+      .navbar {
+        padding: 0 20px;
+      }
 
-
-    
-
+      .logo-pic {
+        top: 130px;
+        right: 20px;
+        height: 180px;
+      }
+    }
   </style>
 </head>
 <body>
   <canvas id="stars"></canvas>
-<nav class="navbar">
-  <a href="#" class="logo">Summerch</a>
-  
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
-  <ul class="nav-links">
-    <li><a href="#">首页</a></li>
-    <li><a href="#">其他</a></li>
-    <li><a href="#">其他</a></li>
-    <li><a href="#">其他</a></li>
-  </ul>
-
-  <button class="toggle-mode" onclick="toggleMode()">🌙</button>
-</nav>
+  <nav class="navbar">
+    <a href="#" class="logo">Summerch</a>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <ul class="nav-links">
+      <li><a href="#">首页</a></li>
+      <li><a href="#">其他</a></li>
+      <li><a href="#">其他</a></li>
+      <li><a href="#">其他</a></li>
+    </ul>
+    <button class="toggle-mode" onclick="toggleMode()">🌙</button>
+  </nav>
 
   <div class="content">
     <h1>欢迎观看<span class="underline">_</span></h1>
@@ -221,11 +212,11 @@
     <p class="riqi">———2025年8月10日</p>
   </div>
 
-  <div class="scroll"></div>   
+  <div class="scroll"></div>
 
   <footer>
-  <p>© 2025 Summerch | 小站慢慢更新中 🎧</p>
-</footer>
+    <p>© 2025 Summerch | 小站慢慢更新中 🎧</p>
+  </footer>
 
   <script>
     function toggleMode() {
@@ -234,6 +225,19 @@
       button.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
     }
 
+    function toggleMenu() {
+      const navLinks = document.querySelector(".nav-links");
+      navLinks.classList.toggle("active");
+    }
+
+    // 自动关闭菜单（点击菜单链接）
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        document.querySelector(".nav-links").classList.remove("active");
+      });
+    });
+
+    // 星空背景动画
     const canvas = document.getElementById("stars");
     const ctx = canvas.getContext("2d");
     let w = window.innerWidth;
@@ -281,22 +285,6 @@
       canvas.width = w;
       canvas.height = h;
     });
-
-    function toggleMenu() {
-  const navLinks = document.querySelector(".nav-links");
-  navLinks.classList.toggle("active");
-}
-
-document.querySelectorAll(".nav-links a").forEach(link => {
-  link.addEventListener("click", () => {
-    document.querySelector(".nav-links").classList.remove("active");
-  });
-});
-
-
-</script>
-
   </script>
-
 </body>
 </html>
