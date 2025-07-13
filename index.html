@@ -7,7 +7,7 @@
   <link rel="icon" href="https://i.postimg.cc/PrwR3qd6/photo-6311810597796301602-x.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
 
-  <style>
+  <style> /*电脑模式*/
     :root {
       --bg-color: #ffffff;
       --text-color: #222222;
@@ -139,10 +139,23 @@
       pointer-events: none;
     }
 
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+}
+
     .scroll {
       height: 5vh;
     }
+  </style>
 
+    <style> /*手机模式*/
     /* 手机端样式 */
     .menu-toggle {
       display: none;
@@ -188,21 +201,25 @@
       }
     }
   </style>
+
 </head>
 <body>
   <canvas id="stars"></canvas>
 
-  <nav class="navbar">
-    <a href="#" class="logo">Summerch</a>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <ul class="nav-links">
-      <li><a href="#">首页</a></li>
-      <li><a href="#">其他</a></li>
-      <li><a href="#">其他</a></li>
-      <li><a href="#">其他</a></li>
-    </ul>
-    <button class="toggle-mode" onclick="toggleMode()">🌙</button>
-  </nav>
+<nav class="navbar">
+  <div class="logo-container">
+     <a href="#" class="logo">Summerch</a>
+    <img src="https://i.postimg.cc/PrwR3qd6/photo-6311810597796301602-x.png" class="logo-img">
+  </div>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <ul class="nav-links">
+    <li><a href="#">首页</a></li>
+    <li><a href="Summerch 作品集">作品集</a></li>
+    <li><a href="Summerch 工委随记">工委随记</a></li>
+    <li><a href="#">其他</a></li>
+  </ul>
+  <button class="toggle-mode" onclick="toggleMode()">🌙</button>
+</nav>
 
   <div class="content">
     <h1>欢迎观看<span class="underline">_</span></h1>
@@ -212,10 +229,12 @@
     <p class="riqi">———2025年8月10日</p>
   </div>
 
-  <div class="scroll"></div>
+  <div class="scroll">
+  <p id="clock" style="padding: 0px 50px;font: size 20px;"></p>
+  </div>
 
   <footer>
-    <p>© 2025 Summerch | 小站慢慢更新中 🎧</p>
+    <p style="text-align: center;">© 2025 Summerch | 小站慢慢更新中 🎧</p>
   </footer>
 
   <script>
@@ -285,6 +304,28 @@
       canvas.width = w;
       canvas.height = h;
     });
+
+    function updateClock() {
+  const now = new Date();
+  const options = { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric',
+    hour: '2-digit', 
+    minute: '2-digit', 
+    second: '2-digit',
+    hour12: false 
+  };
+  document.getElementById('clock').innerText = now.toLocaleString('zh-CN', options);
+}
+
+setInterval(updateClock, 1000);
+updateClock(); // 初始立即运行
+
+
+
   </script>
+
+  
 </body>
 </html>
