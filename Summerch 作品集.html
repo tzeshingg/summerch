@@ -175,52 +175,53 @@ footer {
 }
   </style>
 
-    <style> /*手机模式*/
-    /* 手机端样式 */
-    .menu-toggle {
-      display: none;
-    }
+<style> /*手机模式*/
+.menu-toggle {
+  display: none;
+}
 
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-        font-size: 26px;
-      }
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    font-size: 26px;
+  }
 
-      .nav-links {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: var(--bg-color);
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        padding: 15px 0;
-        display: none;
-        z-index: 999;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      }
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color); /* ✅ 使用变量 */
+    color: var(--text-color);           /* ✅ 确保文字颜色跟随切换 */
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    display: none;
+    z-index: 999;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
 
-      .nav-links.active {
-        display: flex;
-      }
+  .nav-links.active {
+    display: flex;
+  }
 
-      .nav-links li a {
-        font-size: 18px;
-      }
+  .nav-links li a {
+    font-size: 18px;
+    color: var(--text-color); /* ✅ 链接文字颜色也同步 */
+  }
 
-      .navbar {
-        padding: 0 20px;
-      }
+  .navbar {
+    padding: 0 20px;
+  }
 
-      .logo-pic {
-        top: 130px;
-        right: 20px;
-        height: 180px;
-      }
-    }
-  </style>
+  .logo-pic {
+    top: 130px;
+    right: 20px;
+    height: 180px;
+  }
+}
+</style>
 
 </head>
 <body>
