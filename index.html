@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>我的作品站</title>
+  <link rel="icon" href="https://i.postimg.cc/PrwR3qd6/photo-6311810597796301602-x.png" type="image/png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #222222;
+      --nav-bg: rgba(255, 255, 255, 0.15);
+      --nav-blur: blur(10px);
+      --underline: var(--text-color);
+    }
+
+    body.dark-mode {
+      --bg-color: #121212;
+      --text-color: #f0f0f0;
+      --nav-bg: rgba(30, 30, 30, 0.5);
+      --underline: var(--text-color);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Serif SC', serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
+    }
+
+    canvas#stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--nav-bg);
+      backdrop-filter: var(--nav-blur);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .navbar .logo {
+      font-size: 26px;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--text-color);
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .navbar ul li a {
+      font-size: 18px;
+      color: var(--text-color);
+      text-decoration: none;
+      position: relative;
+      padding: 4px 0;
+      transition: color 0.3s;
+    }
+
+    .navbar ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #3f87a6;
+      transition: width 0.3s;
+    }
+
+    .navbar ul li a:hover::after {
+      width: 100%;
+    }
+
+    .toggle-mode {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text-color);
+      transition: color 0.3s;
+    }
+
+    .content {
+      padding: 120px 40px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .underline {
+      display: inline-block;
+      font-size: 35px;
+      animation: blink 1.5s steps(1) infinite;
+      margin-top: 10px;
+    }
+
+    @keyframes blink {
+      0%, 50% {
+        opacity: 1;
+      }
+      50.01%, 100% {
+        opacity: 0;
+      }
+    }
+
+    .riqi {
+      text-align: right;
+      font-size: 15px;
+    }
+
+    .logo-pic {
+      position: absolute;
+      top: 160px;
+      right: 50px;
+      height: 250px;
+      pointer-events: none;
+    }
+
+    .scroll{
+      height: 5vh;
+    }
+
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <nav class="navbar">
+    <a href="#" class="logo">Summerch</a>
+    <ul>
+      <li><a href="#">首页</a></li>
+      <li><a href="#">其他</a></li>
+      <li><a href="#">其他</a></li>
+      <li><a href="#">其他</a></li>
+    </ul>
+    <button class="toggle-mode" onclick="toggleMode()">🌙</button>
+  </nav>
+
+  <div class="content">
+    <h1>欢迎观看<span class="underline">_</span></h1>
+    <img src="https://i.postimg.cc/tJyNB9kc/photo-6311810597796301613-x-removebg-preview.png" class="logo-pic" alt="被你发现本体啦！">
+    <br><br><br><br><br><br><br><br><br>
+    <p>‘有心者轻而成，无心者终不成’</p>
+    <p class="riqi">———2025年8月10日</p>
+  </div>
+
+  <div class="scroll"></div>   
+
+  <footer>
+  <p>© 2025 Summerch | 小站慢慢更新中 🎧</p>
+</footer>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+      const button = document.querySelector(".toggle-mode");
+      button.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    }
+
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    canvas.width = w;
+    canvas.height = h;
+
+    let stars = [];
+    for (let i = 0; i < 100; i++) {
+      stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.2,
+        d: Math.random() * 1
+      });
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "white";
+      ctx.beginPath();
+      for (let i = 0; i < stars.length; i++) {
+        const s = stars[i];
+        ctx.moveTo(s.x, s.y);
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2, true);
+      }
+      ctx.fill();
+      update();
+    }
+
+    function update() {
+      for (let i = 0; i < stars.length; i++) {
+        stars[i].y += stars[i].d;
+        if (stars[i].y > h) {
+          stars[i].y = 0;
+          stars[i].x = Math.random() * w;
+        }
+      }
+    }
+
+    setInterval(drawStars, 33);
+    window.addEventListener("resize", () => {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
+    });
+
+</script>
+
+  </script>
+
+</body>
+</html>
