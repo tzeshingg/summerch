@@ -150,9 +150,6 @@
   height: 40px;
 }
 
-    .scroll {
-      height: 5vh;
-    }
   </style>
 
     <style> /*手机模式*/
@@ -209,13 +206,13 @@
 <nav class="navbar">
   <div class="logo-container">
      <a href="#" class="logo">Summerch</a>
-    <img src="https://i.postimg.cc/PrwR3qd6/photo-6311810597796301602-x.png" class="logo-img">
+    <img src="https://i.postimg.cc/3w03jGKY/photo-6311810597796301602-x-removebg-preview.png" class="logo-img">
   </div>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   <ul class="nav-links">
     <li><a href="#">首页</a></li>
-    <li><a href="Summerch 作品集">作品集</a></li>
-    <li><a href="Summerch 工委随记">工委随记</a></li>
+    <li><a href="Summerch 作品集.html">作品集</a></li>
+    <li><a href="Summerch 工委随记.html">工委随记</a></li>
     <li><a href="#">其他</a></li>
   </ul>
   <button class="toggle-mode" onclick="toggleMode()">🌙</button>
@@ -224,18 +221,14 @@
   <div class="content">
     <h1>欢迎观看<span class="underline">_</span></h1>
     <img src="https://i.postimg.cc/tJyNB9kc/photo-6311810597796301613-x-removebg-preview.png" class="logo-pic" alt="被你发现本体啦！">
-    <br><br><br><br><br><br><br><br><br>
-    <p>‘有心者轻而成，无心者终不成’</p>
+    <p style="margin-top: 230px;">‘有心者轻而成，无心者终不成’</p>
     <p class="riqi">———2025年8月10日</p>
   </div>
 
-  <div class="scroll">
-  <p id="clock" style="padding: 0px 50px;font: size 20px;"></p>
-  </div>
-
-  <footer>
-    <p style="text-align: center;">© 2025 Summerch | 小站慢慢更新中 🎧</p>
-  </footer>
+<footer style="position: absolute;bottom: 0;text-align: center;left: 50%;transform: translateX(-50%);">
+    <p id="clock" style="text-align: center;font: size 20px;"></p>
+   <p style="text-align: center;">© 2025 Summerch | 小站慢慢更新中 🎧</p>
+</footer>
 
   <script>
 function toggleMode() {
