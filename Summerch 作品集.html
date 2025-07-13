@@ -150,6 +150,29 @@
   height: 40px;
 }
 
+footer {
+  font-size: 15px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--text-color); /* 关键：自动跟随日夜模式变色 */
+  background: transparent;
+  padding-bottom: 10px;
+}
+
+.nuli{
+  font-size: 25px;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--text-color); /* 关键：自动跟随日夜模式变色 */
+  background: transparent;
+  padding-bottom: 10px;
+}
   </style>
 
     <style> /*手机模式*/
@@ -210,7 +233,7 @@
   </div>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   <ul class="nav-links">
-    <li><a href="#">首页</a></li>
+    <li><a href="index.html">首页</a></li>
     <li><a href="Summerch 作品集.html">作品集</a></li>
     <li><a href="Summerch 工委随记.html">工委随记</a></li>
     <li><a href="#">其他</a></li>
@@ -218,9 +241,13 @@
   <button class="toggle-mode" onclick="toggleMode()">🌙</button>
 </nav>
 
-<footer style="position: absolute;bottom: 0;text-align: center;left: 50%;transform: translateX(-50%);">
-    <p id="clock" style="text-align: center;font: size 20px;"></p>
-   <p style="text-align: center;">© 2025 Summerch | 小站慢慢更新中 🎧</p>
+<div>
+  <h1 class="nuli">会努力更新的</h1>
+</div>
+
+<footer>
+  <p id="clock" style="font-size: 15px;"></p>
+  <p>© 2025 Summerch | 小站慢慢更新中 🎧</p>
 </footer>
 
   <script>
